@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const config = require("./config/config.json");
 
 const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
+const { MessageEmbed } = require('discord.js');
 const prefix = config.prefix;
 
 client.on("ready", () => {
@@ -12,9 +13,6 @@ client.on("ready", () => {
 client.on("messageCreate", async (message) => {
   if (message.content === "what is my avatar") {
     await message.reply(`Your Avatar is ${message.author.displayAvatarURL()}`);
-  }
-  else if (message.content.startsWith(`${prefix}ping`)) {
-    await message.channel.send("Pong!");
   }
   else if (message.content === "pizza") {
     await message.channel.send("🍕");
@@ -36,6 +34,7 @@ let sad = [
   "crestfallen",
 ];
 
+// sad stuff
 client.on("messageCreate", async (message) => {
   var sad_words = sad[Math.floor(Math.random() * sad.length)];
   if (
@@ -44,6 +43,42 @@ client.on("messageCreate", async (message) => {
   ) {
     await message.channel.send(`I 'm ${sad_words}`);
   }
+});
+
+
+client.on("messageCreate", async (message) => {
+  /*
+  const helpEmbed = new MessageEmbed()
+    .setColor('#ffffff')
+    .seTitle('! help')
+    .setUrl()
+    .setAuthor()
+    .setDescription()
+    .setThumbnail()
+    .addFields()
+    .addField()
+    .setImage('')
+    .seTimestamp()
+    .setFooter()
+
+  */
+  var randomColor = `#` + ((1 << 24) * Math.random() | 0).toString(16);
+  const embedColor = {
+    color: randomColor,
+    title: 'Random Hex generator',
+    description: "Color code: " + "`" + randomColor + "`"
+  };
+
+  if (message.content.startsWith(`${prefix}color`))
+  {
+    await message.channel.send({ embeds: [embedColor]});
+  }
+  /*
+  else if (message.content.startsWith(`${prefix}help`))
+  {
+    await channel.send({ embeds: [helpEmbed] });
+  }
+  */
 });
 
 // sending files
@@ -76,6 +111,13 @@ client.on("ready", () => {
 
     client.user.setActivity(newActivity);
   }, 10000); // 10 seconds delay
+});
+
+// latency command
+client.on('messageCreate', async (message) => {
+  if (message.content === `${prefix}ping`) {
+    await message.channel.send(`🏓 **Latency** is ${Date.now() - message.createdTimestamp}ms`);
+  }
 });
 
 client.login(config.token);
