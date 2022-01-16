@@ -5,8 +5,29 @@ const config = require("./config/config.json");
 const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
 const prefix = config.prefix;
 
+// When the bot is ready display a message in the console
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
+});
+
+// Activity tab
+const activities = [
+  "with the ?help command.",
+  "with Clash Of Clans",
+  "with some code.",
+  "with JavaScript.",
+  "with my pp",
+  "with songs",
+];
+
+client.on("ready", () => {
+  setInterval(() => {
+    // generate random number between 1 and list length.
+    const randomIndex = Math.floor(Math.random() * (activities.length - 1) + 1);
+    const newActivity = activities[randomIndex];
+
+    client.user.setActivity(newActivity);
+  }, 10000); // 10 seconds delay
 });
 
 // Create an event listener for messages
@@ -44,7 +65,6 @@ client.on("messageCreate", async (message) => {
     await message.channel.send(`I 'm ${sad_words}`);
   }
 });
-
 
 client.on("messageCreate", async (message) => {
   /*
@@ -91,26 +111,6 @@ client.on("messageCreate", async (message) => {
       ]
     });
   }
-});
-
-// Activity tab
-const activities = [
-  "with the ?help command.",
-  "with Clash Of Clans",
-  "with some code.",
-  "with JavaScript.",
-  "with my pp",
-  "with songs",
-];
-
-client.on("ready", () => {
-  setInterval(() => {
-    // generate random number between 1 and list length.
-    const randomIndex = Math.floor(Math.random() * (activities.length - 1) + 1);
-    const newActivity = activities[randomIndex];
-
-    client.user.setActivity(newActivity);
-  }, 10000); // 10 seconds delay
 });
 
 // latency command
