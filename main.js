@@ -67,21 +67,6 @@ client.on("messageCreate", async (message) => {
 });
 
 client.on("messageCreate", async (message) => {
-  /*
-  const helpEmbed = new MessageEmbed()
-    .setColor('#ffffff')
-    .seTitle('! help')
-    .setUrl()
-    .setAuthor()
-    .setDescription()
-    .setThumbnail()
-    .addFields()
-    .addField()
-    .setImage('')
-    .seTimestamp()
-    .setFooter()
-
-  */
   var randomColor = `#` + ((1 << 24) * Math.random() | 0).toString(16);
   const embedColor = {
     color: randomColor,
