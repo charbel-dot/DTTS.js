@@ -1,1 +1,1 @@
-# A Discord.js Bot for text to speech
+# A [Discord.js](https://discord.js.org/#/) Bot for text to speech
