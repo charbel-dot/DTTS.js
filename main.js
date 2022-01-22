@@ -118,4 +118,5 @@ client.on("messageCreate", async (message) => {
     await message.reply({ embeds: [Details] });
   }
 });
+
 client.login(config.token);
