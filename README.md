@@ -4,7 +4,7 @@
 
 `Discord.js` **REQUIRED**
 
-`NodeJs v16+` **REQUIRED**
+`Node.js v14+` **REQUIRED**
 
 ## ✔ Installation
 
