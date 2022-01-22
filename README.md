@@ -1,4 +1,4 @@
-# 🤖 A [Discord.js] Bot tutoriel
+# 🤖 [Discord.js] bot Tutorial
 
 ## 🏴 Dependencies
 
