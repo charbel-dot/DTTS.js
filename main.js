@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const { MessageEmbed } = require('discord.js');
+const { MessageEmbed } = require("discord.js");
 const config = require("./config/config.json");
 
 const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
@@ -34,8 +34,7 @@ client.on("ready", () => {
 client.on("messageCreate", async (message) => {
   if (message.content === "what is my avatar") {
     await message.reply(`Your Avatar is ${message.author.displayAvatarURL()}`);
-  }
-  else if (message.content === "pizza") {
+  } else if (message.content === "pizza") {
     await message.channel.send("🍕");
   }
 });
@@ -67,16 +66,15 @@ client.on("messageCreate", async (message) => {
 });
 
 client.on("messageCreate", async (message) => {
-  var randomColor = `#` + ((1 << 24) * Math.random() | 0).toString(16);
+  var randomColor = `#` + (((1 << 24) * Math.random()) | 0).toString(16);
   const embedColor = {
     color: randomColor,
-    title: 'Random Hex generator',
-    description: "Color code: " + "`" + randomColor + "`"
+    title: "Random Hex generator",
+    description: "Color code: " + "`" + randomColor + "`",
   };
 
-  if (message.content.startsWith(`${prefix}color`))
-  {
-    await message.channel.send({ embeds: [embedColor]});
+  if (message.content.startsWith(`${prefix}color`)) {
+    await message.channel.send({ embeds: [embedColor] });
   }
   /*
   else if (message.content.startsWith(`${prefix}help`))
@@ -90,19 +88,34 @@ client.on("messageCreate", async (message) => {
 client.on("messageCreate", async (message) => {
   if (message.content === "send me a random file") {
     await channel.send("There is a random file.", {
-      file: [
-        "",
-        ""
-      ]
+      file: ["", ""],
     });
   }
 });
 
 // latency command
-client.on('messageCreate', async (message) => {
+client.on("messageCreate", async (message) => {
   if (message.content === `${prefix}ping`) {
-    await message.channel.send(`🏓 **Latency** is ${Date.now() - message.createdTimestamp}ms`);
+    await message.channel.send(
+      `🏓 **Latency** is ${Date.now() - message.createdTimestamp}ms`
+    );
   }
 });
 
+client.on("messageCreate", async (message) => {
+  const Details = {
+    author: `${message.guild.name}, ${message.guild.iconURL}`,
+    color: "#FFF",
+    description: `Owner: ${message.guild.owner.user.tag} (${message.guild.owner.id})`,
+    //fields: [{}]
+    footer: `{}client.user.username}, ${client.user.avatarURL}`,
+    timestamp: new Date(),
+  };
+  if (
+    message.content.toLowerCase() === `${prefix}info` ||
+    message.content.toLowerCase() === `${prefix}infos`
+  ) {
+    await message.reply({ embeds: [Details] });
+  }
+});
 client.login(config.token);
